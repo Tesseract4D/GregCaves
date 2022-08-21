@@ -5,12 +5,13 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.IntUnaryOperator;
 
 public final class BiomePicker {
     private final List<Entry> biomeEntries = Lists.newArrayList();
     private double totalWeight;
 
-    public Integer choose(Function<Integer, Integer> rand) {
+    public Integer choose(IntUnaryOperator rand) {
         if (this.biomeEntries.size() == 0) {
             throw new UnsupportedOperationException("No biomes registered!!! This is a problem!");
         }
@@ -31,8 +32,8 @@ public final class BiomePicker {
         this.totalWeight += weight;
     }
 
-    private double target(Function<Integer, Integer> random) {
-        return (double) random.apply(Integer.MAX_VALUE) * this.totalWeight / Integer.MAX_VALUE;
+    private double target(IntUnaryOperator random) {
+        return (double) random.applyAsInt(Integer.MAX_VALUE) * this.totalWeight / Integer.MAX_VALUE;
     }
 
     public List<Entry> getBiomeEntries() {
