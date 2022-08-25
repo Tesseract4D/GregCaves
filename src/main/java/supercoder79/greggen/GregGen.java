@@ -6,7 +6,6 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import supercoder79.greggen.world.GregGenBOPWorldType;
 import supercoder79.greggen.world.GregGenWorldType;
-import supercoder79.greggen.world.biome.GregGenBiomes;
 
 @Mod(modid = Tags.MODID, version = Tags.VERSION, name = Tags.MODNAME, acceptedMinecraftVersions = "[1.7.10]")
 public final class GregGen {
@@ -16,8 +15,6 @@ public final class GregGen {
 
 	@Mod.EventHandler
 	public void onModPreInit(FMLPreInitializationEvent aEvent) {
-		GregGenBiomes.init();
-
 		this.worldType = new GregGenWorldType();
 
 		// Add bop world type

@@ -17,6 +17,6 @@ public final class GregGenWorldType extends WorldType {
 
     @Override
     public WorldChunkManager getChunkManager(World world) {
-        return new GregGenBiomeSource(world);
+        return super.getChunkManager(world);
     }
 }

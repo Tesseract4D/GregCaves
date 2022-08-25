@@ -1,5 +1,5 @@
 // Add your dependencies here
 
 dependencies {
-
+    compile "com.github.glitchfiend.biomesoplenty:BiomesOPlenty:1.7.10-2.1.0.1465:deobf"
 }
