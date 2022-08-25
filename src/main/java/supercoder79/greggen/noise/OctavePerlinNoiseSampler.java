@@ -1,7 +1,5 @@
 package supercoder79.greggen.noise;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import supercoder79.greggen.util.MathHelper;
 import supercoder79.greggen.util.Pair;
 

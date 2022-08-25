@@ -1,7 +1,5 @@
 package supercoder79.greggen.noise;
 
-import com.google.common.collect.ImmutableList;
-
 import java.util.List;
 import java.util.Random;
 import java.util.SortedSet;

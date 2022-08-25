@@ -5,4 +5,8 @@ repositories {
         name = "gt"
         url = "https://gregtech.mechaenetia.com/"
     }
+    maven {
+        name = "MavenPattern"
+        url = "https://maven.falsepattern.com"
+    }
 }

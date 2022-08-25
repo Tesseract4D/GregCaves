@@ -1,6 +1,9 @@
 package supercoder79.greggen.noise;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Random;
 
 public class DoublePerlinNoiseSampler {
     private static final double DOMAIN_SCALE = 1.0181268882175227D;
