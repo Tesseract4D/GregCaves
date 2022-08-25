@@ -14,11 +14,8 @@ public final class GregGenBiomes {
     public static final ShadowBiome SAVANNA_SCRUB = new SavannaScrubBiome(256);
     public static final ShadowBiome SPRUCE_SAVANNA = new SpruceSavannaBiome(257);
 
-    public static final ShadowBiome LUSH_PLAINS = new LushPlainsBiome(258);
-
     public static void init() {
         // -1 means use existing id
         BIOME_PICKERS.computeIfAbsent(BiomeGenBase.savanna.biomeID, (id) -> new BiomePicker()).add(-1, 1.0);
-        BIOME_PICKERS.computeIfAbsent(BiomeGenBase.plains.biomeID, (id) -> new BiomePicker()).add(-1, 1.0);
     }
 }
