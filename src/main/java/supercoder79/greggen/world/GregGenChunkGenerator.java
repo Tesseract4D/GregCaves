@@ -32,7 +32,7 @@ import java.util.Random;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.*;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.*;
 
-public final class GregGenChunkGenerator implements IChunkProvider {
+public class GregGenChunkGenerator implements IChunkProvider {
     private final Random random;
     private final World world;
     private final boolean generateStructures;
@@ -433,10 +433,7 @@ public final class GregGenChunkGenerator implements IChunkProvider {
         BlockFalling.fallInstantly = true;
         int x = chunkX * 16;
         int z = chunkZ * 16;
-
-        GregGenBiomeSource biomeSource = (GregGenBiomeSource) this.world.getWorldChunkManager();
-
-        BiomeGenBase biomegenbase = biomeSource.getShadowBiome(null, x + 16, z + 16, 1, 1)[0];
+        BiomeGenBase biomegenbase = this.world.getBiomeGenForCoords(x + 16, z + 16);
         this.random.setSeed(this.world.getSeed());
         long longA = this.random.nextLong() / 2L * 2L + 1L;
         long longB = this.random.nextLong() / 2L * 2L + 1L;
