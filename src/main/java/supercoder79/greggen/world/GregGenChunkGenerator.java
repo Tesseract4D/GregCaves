@@ -266,7 +266,7 @@ public class GregGenChunkGenerator implements IChunkProvider {
                             for (int pieceZ = 0; pieceZ < 4; ++pieceZ) {
                                 index += idAdd;
                                 if ((density += densityAdd) < 0.0D && blocks[index] == Blocks.stone) {
-                                    if (noiseY * 8 + pieceY < 11) {
+                                    if (noiseY * 8 + pieceY < 6) {
                                         blocks[index] = Blocks.lava;
                                     } else {
                                         blocks[index] = null;

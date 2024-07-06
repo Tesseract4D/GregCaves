@@ -1,16 +1,20 @@
 [
-{
-  "modid": "${modId}",
-  "name": "${modName}",
-  "description": "Adds new and interesting worldgen to work alongside GT6",
-  "version": "${modVersion}",
-  "mcversion": "${minecraftVersion}",
-  "url": "https://github.com/neo-engineers/gregen",
-  "updateUrl": "",
-  "authorList": ["SuperCoder79, unix-supremacist"],
-  "credits": "",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
-}
+  {
+    "modid": "${modId}",
+    "name": "${modName}",
+    "description": "Adds new and interesting worldgen to work alongside GT6",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
+    "url": "https://github.com/neo-engineers/gregen",
+    "updateUrl": "",
+    "authorList": [
+      "SuperCoder79",
+      "unix-supremacist",
+      "Tesseract"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
 ]

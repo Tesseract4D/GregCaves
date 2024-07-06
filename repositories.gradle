@@ -1,12 +1,5 @@
-// Add any additional repositories for your dependencies here
+// Add any additional repositories for your dependencies here.
 
 repositories {
-    maven {
-        name = "gt"
-        url = "https://gregtech.mechaenetia.com/"
-    }
-    maven {
-        name = "MavenPattern"
-        url = "https://maven.falsepattern.com"
-    }
+
 }
