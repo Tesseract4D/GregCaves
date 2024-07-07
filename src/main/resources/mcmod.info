@@ -5,7 +5,7 @@
     "description": "Adds new and interesting worldgen to work alongside GT6",
     "version": "${modVersion}",
     "mcversion": "${minecraftVersion}",
-    "url": "https://github.com/neo-engineers/gregen",
+    "url": "https://github.com/tesseract4d/GregCaves",
     "updateUrl": "",
     "authorList": [
       "SuperCoder79",

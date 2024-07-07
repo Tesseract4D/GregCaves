@@ -1,4 +1,4 @@
-package mods.tesseract.gregcave.world;
+package mods.tesseract.gregcaves.world;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

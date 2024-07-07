@@ -1,4 +1,4 @@
-package mods.tesseract.gregcave.util;
+package mods.tesseract.gregcaves.util;
 
 public final class MathHelper {
     private MathHelper() {}

@@ -1,4 +1,4 @@
-package mods.tesseract.gregcave.util;
+package mods.tesseract.gregcaves.util;
 
 public class Pair<F, S> {
     private final F first;

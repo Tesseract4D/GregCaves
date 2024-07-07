@@ -1,7 +1,7 @@
-package mods.tesseract.gregcave.world;
+package mods.tesseract.gregcaves.world;
 
-import mods.tesseract.gregcave.util.MathHelper;
-import mods.tesseract.gregcave.noise.DoublePerlinNoiseSampler;
+import mods.tesseract.gregcaves.util.MathHelper;
+import mods.tesseract.gregcaves.noise.DoublePerlinNoiseSampler;
 
 import java.util.Random;
 

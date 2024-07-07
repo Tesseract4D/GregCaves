@@ -1,7 +1,7 @@
-package mods.tesseract.gregcave.noise;
+package mods.tesseract.gregcaves.noise;
 
-import mods.tesseract.gregcave.util.MathHelper;
-import mods.tesseract.gregcave.util.Pair;
+import mods.tesseract.gregcaves.util.MathHelper;
+import mods.tesseract.gregcaves.util.Pair;
 
 import java.util.*;
 import java.util.function.LongFunction;

@@ -1,4 +1,4 @@
-package mods.tesseract.gregcave.noise;
+package mods.tesseract.gregcaves.noise;
 
 import java.util.List;
 import java.util.Random;

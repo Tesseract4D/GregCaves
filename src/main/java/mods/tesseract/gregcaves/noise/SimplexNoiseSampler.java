@@ -1,6 +1,6 @@
-package mods.tesseract.gregcave.noise;
+package mods.tesseract.gregcaves.noise;
 
-import mods.tesseract.gregcave.util.MathHelper;
+import mods.tesseract.gregcaves.util.MathHelper;
 
 import java.util.Random;
 

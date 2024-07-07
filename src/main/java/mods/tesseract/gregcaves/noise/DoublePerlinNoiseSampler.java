@@ -1,4 +1,4 @@
-package mods.tesseract.gregcave.noise;
+package mods.tesseract.gregcaves.noise;
 
 import java.util.ArrayList;
 import java.util.List;
