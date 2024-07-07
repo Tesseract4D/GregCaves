@@ -16,6 +16,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.feature.WorldGenDungeons;
+import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.structure.MapGenMineshaft;
 import net.minecraft.world.gen.structure.MapGenScatteredFeature;
 import net.minecraft.world.gen.structure.MapGenStronghold;
@@ -227,6 +228,7 @@ public class ChunkGeneratorGC implements IChunkProvider {
     }
 
     private void generateNoiseCaves(int chunkX, int chunkZ, Block[] blocks, byte[] meta) {
+        BlockFalling.fallInstantly = true;
         generateNoiseCavesNoise(chunkX, chunkZ);
 
         for (int noiseX = 0; noiseX < 4; ++noiseX) {
@@ -266,7 +268,7 @@ public class ChunkGeneratorGC implements IChunkProvider {
                                 index += idAdd;
                                 if ((density += densityAdd) < 0.0D && blocks[index] == Blocks.stone) {
                                     if (noiseY * 8 + pieceY < 6) {
-                                        blocks[index] = Blocks.lava;
+                                        blocks[index] = Blocks.stone;
                                     } else {
                                         blocks[index] = null;
                                     }
@@ -285,6 +287,7 @@ public class ChunkGeneratorGC implements IChunkProvider {
                 }
             }
         }
+        BlockFalling.fallInstantly = false;
     }
 
     private void generateNoiseCavesNoise(int chunkX, int chunkZ) {
@@ -451,7 +454,7 @@ public class ChunkGeneratorGC implements IChunkProvider {
         int x1;
         int y1;
         int z1;
-/*
+
         if (biomegenbase != BiomeGenBase.desert && biomegenbase != BiomeGenBase.desertHills && !generatedVillage && this.random.nextInt(4) == 0
                 && TerrainGen.populate(chunkProvider, world, random, chunkX, chunkZ, generatedVillage, LAKE)) {
             x1 = x + this.random.nextInt(16) + 8;
@@ -470,8 +473,6 @@ public class ChunkGeneratorGC implements IChunkProvider {
             }
         }
 
-
- */
         boolean doGen = TerrainGen.populate(chunkProvider, world, random, chunkX, chunkZ, generatedVillage, DUNGEON);
         for (x1 = 0; doGen && x1 < 8; ++x1) {
             y1 = x + this.random.nextInt(16) + 8;
