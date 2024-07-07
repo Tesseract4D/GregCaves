@@ -1,7 +1,7 @@
-package supercoder79.greggen.noise;
+package mods.tesseract.gregcave.noise;
 
-import supercoder79.greggen.util.MathHelper;
-import supercoder79.greggen.util.Pair;
+import mods.tesseract.gregcave.util.MathHelper;
+import mods.tesseract.gregcave.util.Pair;
 
 import java.util.*;
 import java.util.function.LongFunction;

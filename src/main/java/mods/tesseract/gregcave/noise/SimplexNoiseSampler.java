@@ -1,6 +1,6 @@
-package supercoder79.greggen.noise;
+package mods.tesseract.gregcave.noise;
 
-import supercoder79.greggen.util.MathHelper;
+import mods.tesseract.gregcave.util.MathHelper;
 
 import java.util.Random;
 

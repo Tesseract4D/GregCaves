@@ -1,7 +1,7 @@
-package supercoder79.greggen.world;
+package mods.tesseract.gregcave.world;
 
-import supercoder79.greggen.noise.DoublePerlinNoiseSampler;
-import supercoder79.greggen.util.MathHelper;
+import mods.tesseract.gregcave.util.MathHelper;
+import mods.tesseract.gregcave.noise.DoublePerlinNoiseSampler;
 
 import java.util.Random;
 

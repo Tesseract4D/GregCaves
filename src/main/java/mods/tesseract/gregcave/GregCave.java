@@ -1,4 +1,4 @@
-package supercoder79.greggen;
+package mods.tesseract.gregcave;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -12,6 +12,6 @@ public final class GregCave extends CustomLoadingPlugin {
     }
 
     public void registerFixes() {
-        registerClassWithFixes("supercoder79.greggen.fix.FixesWorldType");
+        registerClassWithFixes("mods.tesseract.gregcave.fix.FixesWorldType");
     }
 }

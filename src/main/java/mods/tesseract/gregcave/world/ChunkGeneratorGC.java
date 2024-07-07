@@ -1,4 +1,4 @@
-package supercoder79.greggen.world;
+package mods.tesseract.gregcave.world;
 
 import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.block.Block;
@@ -16,7 +16,6 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.feature.WorldGenDungeons;
-import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.structure.MapGenMineshaft;
 import net.minecraft.world.gen.structure.MapGenScatteredFeature;
 import net.minecraft.world.gen.structure.MapGenStronghold;
@@ -32,7 +31,7 @@ import java.util.Random;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.*;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.*;
 
-public class GregGenChunkGenerator implements IChunkProvider {
+public class ChunkGeneratorGC implements IChunkProvider {
     private final Random random;
     private final World world;
     private final boolean generateStructures;
@@ -49,7 +48,7 @@ public class GregGenChunkGenerator implements IChunkProvider {
     private NoiseGeneratorOctaves interpolationNoise;
     private NoiseGeneratorPerlin surfaceDepthNoise;
     private double[] surfaceDepthNoises = new double[256];
-    private MapGenBase caveGenerator = new MapGenCaves();
+    private MapGenBase caveGenerator = new MapGenCavesGC();
     private MapGenStronghold strongholdGenerator = new MapGenStronghold();
     private MapGenVillage villageGenerator = new MapGenVillage();
     private MapGenMineshaft mineshaftGenerator = new MapGenMineshaft();
@@ -70,7 +69,7 @@ public class GregGenChunkGenerator implements IChunkProvider {
         ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
     }
 
-    public GregGenChunkGenerator(World world, long seed, boolean generateStructures) {
+    public ChunkGeneratorGC(World world, long seed, boolean generateStructures) {
         this.world = world;
         this.generateStructures = generateStructures;
         this.worldType = world.getWorldInfo().getTerrainType();
@@ -316,7 +315,7 @@ public class GregGenChunkGenerator implements IChunkProvider {
                     double caveNoise = this.noiseCaves.sample(this.terrainNoise[i], y * 8, chunkZ * 16 + (z * 4), chunkX * 16 + (x * 4));
 
                     // Reduce so we don't break the surface
-                    caveNoise = supercoder79.greggen.util.MathHelper.clampedLerp(caveNoise, (lowestScaledDepth * -30) + 20, (y - sub + 2) / 2.0);
+                    caveNoise = mods.tesseract.gregcave.util.MathHelper.clampedLerp(caveNoise, (lowestScaledDepth * -30) + 20, (y - sub + 2) / 2.0);
 
                     this.caveNoise[i] = caveNoise;
                     i++;
@@ -452,7 +451,7 @@ public class GregGenChunkGenerator implements IChunkProvider {
         int x1;
         int y1;
         int z1;
-
+/*
         if (biomegenbase != BiomeGenBase.desert && biomegenbase != BiomeGenBase.desertHills && !generatedVillage && this.random.nextInt(4) == 0
                 && TerrainGen.populate(chunkProvider, world, random, chunkX, chunkZ, generatedVillage, LAKE)) {
             x1 = x + this.random.nextInt(16) + 8;
@@ -471,6 +470,8 @@ public class GregGenChunkGenerator implements IChunkProvider {
             }
         }
 
+
+ */
         boolean doGen = TerrainGen.populate(chunkProvider, world, random, chunkX, chunkZ, generatedVillage, DUNGEON);
         for (x1 = 0; doGen && x1 < 8; ++x1) {
             y1 = x + this.random.nextInt(16) + 8;

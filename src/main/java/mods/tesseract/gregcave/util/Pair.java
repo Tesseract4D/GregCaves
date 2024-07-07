@@ -1,4 +1,4 @@
-package supercoder79.greggen.util;
+package mods.tesseract.gregcave.util;
 
 public class Pair<F, S> {
     private final F first;

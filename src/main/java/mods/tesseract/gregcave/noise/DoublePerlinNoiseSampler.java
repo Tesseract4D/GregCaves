@@ -1,4 +1,4 @@
-package supercoder79.greggen.noise;
+package mods.tesseract.gregcave.noise;
 
 import java.util.ArrayList;
 import java.util.List;
