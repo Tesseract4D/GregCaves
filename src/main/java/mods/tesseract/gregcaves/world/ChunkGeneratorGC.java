@@ -14,7 +14,10 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.*;
+import net.minecraft.world.gen.MapGenBase;
+import net.minecraft.world.gen.NoiseGenerator;
+import net.minecraft.world.gen.NoiseGeneratorOctaves;
+import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenDungeons;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.structure.MapGenMineshaft;
@@ -54,7 +57,7 @@ public class ChunkGeneratorGC implements IChunkProvider {
     private MapGenVillage villageGenerator = new MapGenVillage();
     private MapGenMineshaft mineshaftGenerator = new MapGenMineshaft();
     private MapGenScatteredFeature templeGenerator = new MapGenScatteredFeature();
-    private MapGenBase ravineGenerator = new MapGenRavine();
+    private MapGenBase ravineGenerator = new MapGenRavineGC();
     private BiomeGenBase[] biomes;
     private double[] interpolationNoises;
     private double[] lowerInterpolatedNoises;
@@ -137,7 +140,7 @@ public class ChunkGeneratorGC implements IChunkProvider {
                         double z1Add = (x1z1 - x0z1) * 0.25D;
 
                         for (int pieceX = 0; pieceX < 4; ++pieceX) {
-                            int index = pieceX + noiseX * 4 << 12 | 0 + noiseZ * 4 << 8 | noiseY * 8 + pieceY;
+                            int index = pieceX + noiseX * 4 << 12 | noiseZ * 4 << 8 | noiseY * 8 + pieceY;
                             short idAdd = 256;
                             index -= idAdd;
                             double densityAdd = (z1 - z0) * 0.25D;
@@ -174,12 +177,21 @@ public class ChunkGeneratorGC implements IChunkProvider {
         if (event.getResult() == Event.Result.DENY) return;
 
         double scale = 0.03125D;
-        this.surfaceDepthNoises = this.surfaceDepthNoise.func_151599_a(this.surfaceDepthNoises, (double) (chunkX * 16), (double) (chunkZ * 16), 16, 16, scale * 2.0D, scale * 2.0D, 1.0D);
+        this.surfaceDepthNoises = this.surfaceDepthNoise.func_151599_a(this.surfaceDepthNoises, chunkX * 16, chunkZ * 16, 16, 16, scale * 2.0D, scale * 2.0D, 1.0D);
 
         for (int x = 0; x < 16; ++x) {
             for (int z = 0; z < 16; ++z) {
                 BiomeGenBase biomegenbase = biomes[z + x * 16];
-                biomegenbase.genTerrainBlocks(this.world, this.random, blocks, meta, chunkX * 16 + x, chunkZ * 16 + z, this.surfaceDepthNoises[z + x * 16]);
+                int cx = chunkX * 16 + x, cz = chunkZ * 16 + z;
+                biomegenbase.genTerrainBlocks(this.world, this.random, blocks, meta, cx, cz, this.surfaceDepthNoises[z + x * 16]);
+                int i1 = cx & 15;
+                int j1 = cz & 15;
+                int k1 = blocks.length / 256;
+                for (int l1 = 5; l1 > 0; --l1) {
+                    int i2 = (j1 * 16 + i1) * k1 + l1;
+                    if (blocks[i2] == Blocks.bedrock)
+                        blocks[i2] = Blocks.stone;
+                }
             }
         }
     }
@@ -258,7 +270,7 @@ public class ChunkGeneratorGC implements IChunkProvider {
                         double z1Add = (x1z1 - x0z1) * 0.25D;
 
                         for (int pieceX = 0; pieceX < 4; ++pieceX) {
-                            int index = pieceX + noiseX * 4 << 12 | 0 + noiseZ * 4 << 8 | noiseY * 8 + pieceY;
+                            int index = pieceX + noiseX * 4 << 12 | noiseZ * 4 << 8 | noiseY * 8 + pieceY;
                             short idAdd = 256;
                             index -= idAdd;
                             double densityAdd = (z1 - z0) * 0.25D;
@@ -396,8 +408,8 @@ public class ChunkGeneratorGC implements IChunkProvider {
                 }
 
                 ++horizontalIndex;
-                double scaledDepth = (double) depth;
-                double scaledScale = (double) scale;
+                double scaledDepth = depth;
+                double scaledScale = scale;
                 scaledDepth += depthNoise * 0.2D;
                 scaledDepth = scaledDepth * 8.5D / 8.0D;
                 double terrainHeight = 8.5D + scaledDepth * 4.0D;
@@ -416,7 +428,7 @@ public class ChunkGeneratorGC implements IChunkProvider {
 
                     // Scale down the last 3 layers
                     if (pieceY > 29) {
-                        double lerp = (double) ((float) (pieceY - 29) / 3.0F);
+                        double lerp = (float) (pieceY - 29) / 3.0F;
                         noise = noise * (1.0D - lerp) + -10.0D * lerp;
                     }
 
@@ -456,7 +468,7 @@ public class ChunkGeneratorGC implements IChunkProvider {
         int z1;
 
         if (biomegenbase != BiomeGenBase.desert && biomegenbase != BiomeGenBase.desertHills && !generatedVillage && this.random.nextInt(4) == 0
-                && TerrainGen.populate(chunkProvider, world, random, chunkX, chunkZ, generatedVillage, LAKE)) {
+            && TerrainGen.populate(chunkProvider, world, random, chunkX, chunkZ, generatedVillage, LAKE)) {
             x1 = x + this.random.nextInt(16) + 8;
             y1 = this.random.nextInt(256);
             z1 = z + this.random.nextInt(16) + 8;
