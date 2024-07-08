@@ -3,10 +3,9 @@ package mods.tesseract.gregcaves.world;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.MapGenCaves;
+import net.minecraft.world.gen.MapGenRavine;
 
-public class MapGenCavesGC extends MapGenCaves {
-
+public class MapGenRavineGC extends MapGenRavine {
     private boolean isExceptionBiome(BiomeGenBase biome) {
         return biome == BiomeGenBase.mushroomIsland || biome == BiomeGenBase.beach || biome == BiomeGenBase.desert;
     }
@@ -18,14 +17,9 @@ public class MapGenCavesGC extends MapGenCaves {
         Block block = data[index];
 
         if (block == Blocks.stone || block == filler || block == top) {
-            if (y < 2) {
-                data[index] = Blocks.lava;
-            } else {
-                data[index] = null;
-
-                if (foundTop && data[index - 1] == filler) {
-                    data[index - 1] = top;
-                }
+            data[index] = null;
+            if (foundTop && data[index - 1] == filler) {
+                data[index - 1] = top;
             }
         }
     }
