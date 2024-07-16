@@ -27,8 +27,6 @@ public class MapGenGregCaves extends MapGenCaves {
     @Override
     public void func_151539_a(IChunkProvider c, World w, int chunkX, int chunkZ, Block[] blocks) {
         if (worldObj != w) {
-            this.worldObj = w;
-            this.rand.setSeed(w.getSeed());
             this.caveNoise = new double[825];
             this.biomeWeightTable = new float[25];
             this.field_147431_j = new NoiseGeneratorOctaves(this.rand, 16);
@@ -43,11 +41,12 @@ public class MapGenGregCaves extends MapGenCaves {
                 }
             }
         }
+        this.worldObj = w;
+        this.rand.setSeed(w.getSeed());
         int k = this.range;
         long l = this.rand.nextLong();
         long i1 = this.rand.nextLong();
         BlockFalling.fallInstantly = true;
-        this.generateNoiseCaves(chunkX, chunkZ, blocks);
         for (int j1 = chunkX - k; j1 <= chunkX + k; ++j1) {
             for (int k1 = chunkZ - k; k1 <= chunkZ + k; ++k1) {
                 long l1 = (long) j1 * l;
@@ -56,6 +55,7 @@ public class MapGenGregCaves extends MapGenCaves {
                 this.func_151538_a(w, j1, k1, chunkX, chunkZ, blocks);
             }
         }
+        this.generateNoiseCaves(chunkX, chunkZ, blocks);
         BlockFalling.fallInstantly = false;
     }
 
@@ -97,14 +97,27 @@ public class MapGenGregCaves extends MapGenCaves {
 
                             for (int pieceZ = 0; pieceZ < 4; ++pieceZ) {
                                 index += idAdd;
-                                if ((density += densityAdd) < 0.0D && blocks[index] == Blocks.stone) {
-                                    int y = noiseY * 8 + pieceY;
-                                    if (y < 6) {
-                                        blocks[index] = Blocks.stone;
-                                    } else if (y < GregCaves.caveLavaLevel) {
-                                        blocks[index] = Blocks.flowing_lava;
+                                if ((density += densityAdd) < 0) {
+                                    if (GregCaves.smoothBedrock) {
+                                        if (blocks[index] == Blocks.stone) {
+                                            int y = noiseY * 8 + pieceY;
+                                            if (y > 5) {
+                                                if (y < GregCaves.caveLavaLevel) {
+                                                    blocks[index] = Blocks.flowing_lava;
+                                                } else {
+                                                    blocks[index] = null;
+                                                }
+                                            }
+                                        }
                                     } else {
-                                        blocks[index] = null;
+                                        int y = noiseY * 8 + pieceY;
+                                        if (y > 0) {
+                                            if (blocks[index] == Blocks.bedrock) {
+                                                blocks[index] = Blocks.stone;
+                                            } else {
+                                                blocks[index] = null;
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -244,7 +257,7 @@ public class MapGenGregCaves extends MapGenCaves {
 
         if (block == Blocks.stone || block == filler || block == top) {
             if (y < GregCaves.caveLavaLevel) {
-                data[index] = Blocks.lava;
+                data[index] = Blocks.flowing_lava;
             } else {
                 data[index] = null;
                 if (foundTop && data[index - 1] == filler) {
