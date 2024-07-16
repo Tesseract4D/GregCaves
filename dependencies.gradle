@@ -35,6 +35,7 @@
  */
 dependencies {
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.5.4-GTNH:dev")
-    implementation "maven.modrinth:mysteriumlibunofficial:1.5.4"
+    implementation "maven.modrinth:mysteriumlibunofficial:1.5.7"
+    //implementation files('libs/+MysteriumLib-1.5.7.jar')
     implementation files("libs/RWG-alpha-1.5.0.jar")
 }
